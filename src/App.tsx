@@ -3,6 +3,12 @@ import { TonConnectButton } from "@tonconnect/ui-react";
 import { useSorosContract } from "./hooks/useSorosContract";
 import { useTonConnect } from "./hooks/useTonConnect";
 import { fromNano } from "ton-core";
+import WebApp from '@twa-dev/sdk'
+
+
+const showAlert = () => {
+   WebApp.showAlert('Hey there!');
+}
 
 function App() {
 
@@ -20,6 +26,16 @@ function App() {
   const { connected } = useTonConnect()
   return (
     <div>
+      <div>{WebApp.platform}</div>
+      {
+         <a
+         onClick={() => {
+           showAlert();
+         }}
+       >
+         Trigger Alert
+       </a>
+      }
       <div className="contract_addrs">
         <TonConnectButton/>
       </div>

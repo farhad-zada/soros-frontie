@@ -5,14 +5,20 @@ import { useTonConnect } from "./hooks/useTonConnect";
 import { fromNano } from "ton-core";
 import WebApp from '@twa-dev/sdk'
 
-
 const showAlert = () => {
-   WebApp.showAlert('Hey there!');
+   WebApp.showAlert('Nice to meet you!');
+}
+
+const swtichTheme = () => {
+  if (WebApp.colorScheme == "dark") {
+    WebApp.colorScheme = "light";
+  
+  } else {
+    WebApp.colorScheme = "dark";
+  }
 }
 
 function App() {
-
-
   const {
     contract_address,
     counter_value,
@@ -27,6 +33,16 @@ function App() {
   return (
     <div>
       <div>{WebApp.platform}</div>
+      {
+         <a
+         onClick={() => {
+            swtichTheme();
+         }}
+       >
+         Switch Theme
+       </a>
+    }
+    <br />
       {
          <a
          onClick={() => {

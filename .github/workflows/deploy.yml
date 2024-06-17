@@ -18,6 +18,17 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 20
+      - name: Clean up Node modules
+        run: rm -rf node_modules
+
+      - name: Clean up dist folder
+        run: rm -rf dist
+
+      - name: Clean up package-lock.json
+        run: rm -rf package-lock.json
+
+      - name: Clean up cache
+        run: npm cache clean --force
 
       - name: Install dependencies
         run: npm install

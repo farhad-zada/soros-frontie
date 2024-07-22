@@ -18,6 +18,15 @@ const swtichTheme = () => {
   }
 }
 
+const getUserData = async () => {
+  try {
+    const userData = WebApp.initData;
+    console.log(userData);
+    return userData;
+  } catch (error) {
+    console.error(error);
+  }}
+
 function App() {
   const {
     contract_address,
@@ -102,6 +111,16 @@ function App() {
             Request withdraw of all funds
           </a>
         )}
+      </div>
+      {/* Show user data */}
+      <div className="userData">
+        <a
+          onClick={() => {
+            getUserData();
+          }}
+        >
+          Get User Data
+        </a>
       </div>
           
         </div>

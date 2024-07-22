@@ -12,12 +12,23 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup Node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
           node-version: 20
+      - name: Clean up Node modules
+        run: rm -rf node_modules
+
+      - name: Clean up dist folder
+        run: rm -rf dist
+
+      - name: Clean up package-lock.json
+        run: rm -rf package-lock.json
+
+      - name: Clean up cache
+        run: npm cache clean --force
 
       - name: Install dependencies
         run: npm install
@@ -26,7 +37,7 @@ jobs:
         run: npm run build
 
       - name: Upload production-ready build files
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: production-files
           path: ./dist
@@ -39,10 +50,10 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Download artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: production-files
           path: ./dist

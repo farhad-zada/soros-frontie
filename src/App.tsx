@@ -3,10 +3,31 @@ import { TonConnectButton } from "@tonconnect/ui-react";
 import { useSorosContract } from "./hooks/useSorosContract";
 import { useTonConnect } from "./hooks/useTonConnect";
 import { fromNano } from "ton-core";
+import WebApp from '@twa-dev/sdk'
+
+const showAlert = () => {
+   WebApp.showAlert('Nice to meet you!');
+}
+
+const swtichTheme = () => {
+  if (WebApp.colorScheme == "dark") {
+    WebApp.colorScheme = "light";
+  
+  } else {
+    WebApp.colorScheme = "dark";
+  }
+}
+
+const getUserData = async () => {
+  try {
+    const userData = WebApp.initData;
+    console.log(userData);
+    return userData;
+  } catch (error) {
+    console.error(error);
+  }}
 
 function App() {
-
-
   const {
     contract_address,
     counter_value,
@@ -20,6 +41,26 @@ function App() {
   const { connected } = useTonConnect()
   return (
     <div>
+      <div>{WebApp.platform}</div>
+      {
+         <a
+         onClick={() => {
+            swtichTheme();
+         }}
+       >
+         Switch Theme
+       </a>
+    }
+    <br />
+      {
+         <a
+         onClick={() => {
+           showAlert();
+         }}
+       >
+         Trigger Alert
+       </a>
+      }
       <div className="contract_addrs">
         <TonConnectButton/>
       </div>
@@ -70,6 +111,16 @@ function App() {
             Request withdraw of all funds
           </a>
         )}
+      </div>
+      {/* Show user data */}
+      <div className="userData">
+        <a
+          onClick={() => {
+            getUserData();
+          }}
+        >
+          Get User Data
+        </a>
       </div>
           
         </div>
